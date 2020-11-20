@@ -1,0 +1,26 @@
+$space-large: 3.5rem;
+$space-med: 2.5rem;
+
+$title-color: rgb(202, 125, 25);
+
+.page-title {
+	margin-top: $space-large;
+	margin-bottom: $space-med;
+	color: $title-color;
+}
+
+input[type=search] {
+	box-shadow: none;
+}
+
+.search-button {
+	margin-right: 1rem;
+}
+
+.centered-box {
+	margin-top: $space-large;
+	border: 3px solid rgba(22, 133, 207, 0.2);
+	padding: 0 $space-large $space-large $space-large;
+	background-color: rgba(22, 133, 207, 0.1);
+	box-shadow: 5px 5px #ccc;
+}

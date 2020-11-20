@@ -29332,8 +29332,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../../node_modules/css-loader/index.js!./app.css", function() {
-				var newContent = require("!!../../node_modules/css-loader/index.js!./app.css");
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./app.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./app.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -29351,7 +29351,7 @@
 
 
 	// module
-	exports.push([module.id, ".page-title {\r\n\tmargin-top: 3.5rem;\r\n\tmargin-bottom: 2.5rem;\r\n}\r\n\r\ninput[type=search] {\r\n\tbox-shadow: none;\r\n}\r\n\r\n.search-button {\r\n\tmargin-right: 1rem;\r\n}\r\n\r\n.centered-box {\r\n\tmargin-top: 3.5rem;\r\n\tborder: 3px solid rgba(22, 133, 207, 0.2);\r\n\tpadding: 0 3.5rem 3.5rem 3.5rem;\r\n\tbackground-color: rgba(22, 133, 207, 0.1);\r\n}", ""]);
+	exports.push([module.id, ".page-title {\n  margin-top: 3.5rem;\n  margin-bottom: 2.5rem;\n  color: #ca7d19; }\n\ninput[type=search] {\n  box-shadow: none; }\n\n.search-button {\n  margin-right: 1rem; }\n\n.centered-box {\n  margin-top: 3.5rem;\n  border: 3px solid rgba(22, 133, 207, 0.2);\n  padding: 0 3.5rem 3.5rem 3.5rem;\n  background-color: rgba(22, 133, 207, 0.1);\n  box-shadow: 5px 5px #ccc; }\n", ""]);
 
 	// exports
 
