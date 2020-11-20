@@ -105,11 +105,11 @@
 
 	var Main = __webpack_require__(251);
 	var Weather = __webpack_require__(253);
-	var About = __webpack_require__(283);
-	var Examples = __webpack_require__(284);
+	var About = __webpack_require__(284);
+	var Examples = __webpack_require__(285);
 
 	// Load foundation
-	__webpack_require__(285);
+	__webpack_require__(286);
 	$(document).foundation();
 
 	ReactDOM.render(React.createElement(
@@ -26926,6 +26926,7 @@
 	var WeatherForm = __webpack_require__(254);
 	var WeatherMessage = __webpack_require__(255);
 	var openWeatherMap = __webpack_require__(256);
+	var ErrorModal = __webpack_require__(283);
 
 	var Weather = React.createClass({
 		displayName: 'Weather',
@@ -26938,7 +26939,10 @@
 		handleSearch: function handleSearch(location) {
 			var that = this;
 
-			this.setState({ isLoading: true });
+			this.setState({
+				isLoading: true,
+				errorMessage: undefined
+			});
 
 			openWeatherMap.getTemp(location).then(function (temp) {
 				that.setState({
@@ -26946,16 +26950,19 @@
 					temp: temp,
 					isLoading: false
 				});
-			}, function (errorMessage) {
-				that.setState({ isLoading: false });
-				alert(errorMessage);
+			}, function (e) {
+				that.setState({
+					isLoading: false,
+					errorMessage: e.message
+				});
 			});
 		},
 		render: function render() {
 			var _state = this.state,
 			    isLoading = _state.isLoading,
 			    location = _state.location,
-			    temp = _state.temp;
+			    temp = _state.temp,
+			    errorMessage = _state.errorMessage;
 
 
 			function renderMessage() {
@@ -26970,6 +26977,12 @@
 				}
 			}
 
+			function renderError() {
+				if (typeof errorMessage === 'string') {
+					return React.createElement(ErrorModal, { message: errorMessage });
+				}
+			}
+
 			return React.createElement(
 				'div',
 				null,
@@ -26979,7 +26992,8 @@
 					'Get Weather'
 				),
 				React.createElement(WeatherForm, { onSearch: this.handleSearch }),
-				renderMessage()
+				renderMessage(),
+				renderError()
 			);
 		}
 	});
@@ -27075,7 +27089,8 @@
 					return res.data.main.temp;
 				}
 			}, function (err) {
-				throw new Error(err.response.data.message);
+				// throw new Error(err.response.data.message);
+				throw new Error('Unable to fetch weather for that location!');
 			});
 		}
 	};
@@ -28763,6 +28778,64 @@
 /* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var React = __webpack_require__(8);
+
+	var ErrorModal = React.createClass({
+		displayName: 'ErrorModal',
+
+		getDefaultProps: function getDefaultProps() {
+			return {
+				title: 'Error'
+			};
+		},
+		propTypes: {
+			title: React.PropTypes.string,
+			message: React.PropTypes.string.isRequired
+		},
+		componentDidMount: function componentDidMount() {
+			var modal = new Foundation.Reveal($('#error-modal'));
+			modal.open();
+		},
+		render: function render() {
+			var _props = this.props,
+			    title = _props.title,
+			    message = _props.message;
+
+			return React.createElement(
+				'div',
+				{ id: 'error-modal', className: 'reveal tiny text-center', 'data-reveal': '' },
+				React.createElement(
+					'h4',
+					null,
+					title
+				),
+				React.createElement(
+					'p',
+					null,
+					message
+				),
+				React.createElement(
+					'p',
+					null,
+					React.createElement(
+						'button',
+						{ className: 'button hollow', 'data-close': '' },
+						'OK'
+					)
+				)
+			);
+		}
+	});
+
+	module.exports = ErrorModal;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+
+/***/ }),
+/* 284 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	var React = __webpack_require__(8);
@@ -28782,7 +28855,7 @@
 			React.createElement(
 				'p',
 				null,
-				'This is a weather application built on React. I have built this for The Complete React Web App Developer Course.'
+				'This is a weather application built on React. I have built this for The Complete React Web App Developer Course avaiulable on UDEMY.'
 			),
 			React.createElement(
 				'p',
@@ -28800,7 +28873,7 @@
 						{ href: 'https://facebook.github.io/react', target: '_blank' },
 						'React'
 					),
-					' - This was the JavaScript framwork used.'
+					' - This was the JavaScript framework used.'
 				),
 				React.createElement(
 					'li',
@@ -28810,7 +28883,7 @@
 						{ href: 'http://openweathermap.org', target: '_blank' },
 						'Open Weather Map'
 					),
-					' - This is the API used to search for weather data by cityy name.'
+					' - This is the API used to search for weather data by city name.'
 				),
 				React.createElement(
 					'li',
@@ -28821,6 +28894,16 @@
 						'GitHub Repo'
 					),
 					' - This is the GitHub repo for the app.'
+				),
+				React.createElement(
+					'li',
+					null,
+					React.createElement(
+						'a',
+						{ href: 'https://www.udemy.com/course/the-complete-react-web-app-developer-course/', target: '_blank' },
+						'Udemy Course'
+					),
+					' - This is the course which is available on Udemy.com.'
 				)
 			),
 			React.createElement(Link, { to: '/' })
@@ -28830,7 +28913,7 @@
 	module.exports = About;
 
 /***/ }),
-/* 284 */
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28882,16 +28965,16 @@
 	module.exports = Examples;
 
 /***/ }),
-/* 285 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(286);
+	var content = __webpack_require__(287);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(288)(content, {});
+	var update = __webpack_require__(289)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -28908,10 +28991,10 @@
 	}
 
 /***/ }),
-/* 286 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(287)();
+	exports = module.exports = __webpack_require__(288)();
 	// imports
 
 
@@ -28922,7 +29005,7 @@
 
 
 /***/ }),
-/* 287 */
+/* 288 */
 /***/ (function(module, exports) {
 
 	/*
@@ -28978,7 +29061,7 @@
 
 
 /***/ }),
-/* 288 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
