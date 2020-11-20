@@ -26979,7 +26979,11 @@
 					'Get Weather'
 				),
 				React.createElement(WeatherForm, { onSearch: this.handleSearch }),
-				renderMessage()
+				React.createElement(
+					'div',
+					{ className: 'text-center' },
+					renderMessage()
+				)
 			);
 		}
 	});
@@ -28767,15 +28771,67 @@
 /* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(8);
 
+	var _require = __webpack_require__(166),
+	    Link = _require.Link;
+
 	var About = function About(props) {
 		return React.createElement(
-			"h1",
-			{ className: "text-center" },
-			"About"
+			'div',
+			null,
+			React.createElement(
+				'h1',
+				{ className: 'text-center' },
+				'About'
+			),
+			React.createElement(
+				'p',
+				null,
+				'This is a weather application built on React. I have built this for The Complete React Web App Developer Course.'
+			),
+			React.createElement(
+				'p',
+				null,
+				'Here are some the tools used to build this app.'
+			),
+			React.createElement(
+				'ul',
+				null,
+				React.createElement(
+					'li',
+					null,
+					React.createElement(
+						'a',
+						{ href: 'https://facebook.github.io/react', target: '_blank' },
+						'React'
+					),
+					' - This was the JavaScript framwork used.'
+				),
+				React.createElement(
+					'li',
+					null,
+					React.createElement(
+						'a',
+						{ href: 'http://openweathermap.org', target: '_blank' },
+						'Open Weather Map'
+					),
+					' - This is the API used to search for weather data by cityy name.'
+				),
+				React.createElement(
+					'li',
+					null,
+					React.createElement(
+						'a',
+						{ href: 'https://github.com/happycycler/reactweather', target: '_blank' },
+						'GitHub Repo'
+					),
+					' - This is the GitHub repo for the app.'
+				)
+			),
+			React.createElement(Link, { to: '/' })
 		);
 	};
 
