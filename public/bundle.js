@@ -27011,11 +27011,19 @@
 			return React.createElement(
 				'form',
 				{ onSubmit: this.onFormSubmit },
-				React.createElement('input', { type: 'text', ref: 'location', placeholder: 'Location name ...' }),
 				React.createElement(
-					'button',
-					{ className: 'button' },
-					'Get Weather'
+					'div',
+					{ className: 'row' },
+					React.createElement('input', { type: 'text', ref: 'location', placeholder: 'Location name ...' }),
+					React.createElement(
+						'div',
+						{ className: 'text-center' },
+						React.createElement(
+							'button',
+							{ className: 'button' },
+							'Get Weather'
+						)
+					)
 				)
 			);
 		}
